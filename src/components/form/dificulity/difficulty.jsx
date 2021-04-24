@@ -9,6 +9,7 @@ function Dificulity(props) {
   };
   return (
     <div>
+      <h4 className="text-muted">Select Difficulty:</h4>
       <select
         className="form-select"
         aria-label="Default select example"
