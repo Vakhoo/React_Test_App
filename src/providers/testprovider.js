@@ -11,6 +11,19 @@ function TestProviderComponent({ children }) {
     setDiffclty(diff);
   };
 
+  const onAnswer = (answer, correct_answer) => {
+    const isCorrect = answer === correct_answer;
+
+    console.log(
+      'my answer: ',
+      answer,
+      'correct answer: ',
+      correct_answer,
+      'real: ',
+      isCorrect,
+    );
+  };
+
   useEffect(() => {
     (async () => {
       const data = await API_TEST_SERVICE.getUsersListAsync({
@@ -21,7 +34,8 @@ function TestProviderComponent({ children }) {
     })();
   }, [diffclty]);
   return (
-    <TestProvider.Provider value={{ diffclty, testList, onSetDiffclty }}>
+    <TestProvider.Provider
+      value={{ diffclty, testList, onSetDiffclty, onAnswer }}>
       {children}
     </TestProvider.Provider>
   );
