@@ -16,7 +16,7 @@ function TestProviderComponent({ children }) {
       const data = await API_TEST_SERVICE.getUsersListAsync({
         difficulty: diffclty,
       });
-      setTestList(data);
+      setTestList(data.results);
       console.log(data);
     })();
   }, [diffclty]);
