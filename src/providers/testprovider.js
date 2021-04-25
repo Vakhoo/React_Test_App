@@ -5,6 +5,7 @@ export const TestProvider = React.createContext(null);
 
 function TestProviderComponent({ children }) {
   const [diffclty, setDiffclty] = useState('easy');
+  const [category, setCategory] = useState(15);
   const [testList, setTestList] = useState([]);
   const [count, setCount] = useState(0);
   const [score, setScore] = useState(0);
@@ -12,6 +13,9 @@ function TestProviderComponent({ children }) {
 
   const onSetDiffclty = (diff) => {
     setDiffclty(diff);
+  };
+  const onSetCategory = (cat) => {
+    setCategory(cat);
   };
 
   const onReset = () => {
@@ -49,8 +53,6 @@ function TestProviderComponent({ children }) {
           ...testList.slice(index + 1),
         ];
         setTestList(newList);
-
-        // console.log(newList);
       }
     } else {
       if (isCorrect) {
@@ -89,14 +91,13 @@ function TestProviderComponent({ children }) {
     (async () => {
       const data = await API_TEST_SERVICE.getUsersListAsync({
         difficulty: diffclty,
+        category: category,
       });
       setTestList(data.results);
       setScore(0);
       setCount(0);
-      // console.log(buttonCollor);
-      // console.log(data);
     })();
-  }, [diffclty, reset]);
+  }, [diffclty, category, reset]);
   return (
     <TestProvider.Provider
       value={{
@@ -107,6 +108,7 @@ function TestProviderComponent({ children }) {
         count,
         score,
         onReset,
+        onSetCategory,
       }}>
       {children}
     </TestProvider.Provider>

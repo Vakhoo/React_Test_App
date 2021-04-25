@@ -5,11 +5,11 @@ function Restart(props) {
   const { onReset } = useContext(TestProvider);
   return (
     <div
-      class="d-grid gap-2 my-5"
+      className="d-grid gap-2 my-5"
       onClick={() => {
         onReset();
       }}>
-      <button class="btn btn-primary" type="button">
+      <button className="btn btn-primary" type="button">
         Restart
       </button>
     </div>
