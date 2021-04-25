@@ -1,6 +1,7 @@
 import Difficulty from '../../components/form/dificulity';
 import Score from '../../components/form/score';
 import Testing from '../../components/form/testing/testing';
+import Restart from '../../components/form/restart';
 import TestProviderComponent from '../../providers/testprovider';
 function TestHome(props) {
   return (
@@ -14,6 +15,9 @@ function TestHome(props) {
         </div>
         <div className="col-md-7 mx-auto mt-5">
           <Score />
+        </div>
+        <div className="col-md-7 mx-auto mt-5">
+          <Restart />
         </div>
       </div>
     </TestProviderComponent>
