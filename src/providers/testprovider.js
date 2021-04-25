@@ -6,6 +6,8 @@ export const TestProvider = React.createContext(null);
 function TestProviderComponent({ children }) {
   const [diffclty, setDiffclty] = useState('easy');
   const [testList, setTestList] = useState([]);
+  const [count, setCount] = useState(0);
+  const [score, setScore] = useState(0);
 
   const onSetDiffclty = (diff) => {
     setDiffclty(diff);
@@ -17,7 +19,7 @@ function TestProviderComponent({ children }) {
     const index = testList.findIndex(
       (el) => el.question === correct_answer.question,
     );
-    if(answer==="True"){
+    if (answer === 'True') {
       if (isCorrect) {
         const newList = [
           ...testList.slice(0, index),
@@ -29,8 +31,8 @@ function TestProviderComponent({ children }) {
           ...testList.slice(index + 1),
         ];
         setTestList(newList);
-
-        console.log(newList);
+        setScore(score + 1);
+        // console.log(newList);
       } else {
         const newList = [
           ...testList.slice(0, index),
@@ -43,9 +45,9 @@ function TestProviderComponent({ children }) {
         ];
         setTestList(newList);
 
-        console.log(newList);
+        // console.log(newList);
       }
-    }else{
+    } else {
       if (isCorrect) {
         const newList = [
           ...testList.slice(0, index),
@@ -57,8 +59,9 @@ function TestProviderComponent({ children }) {
           ...testList.slice(index + 1),
         ];
         setTestList(newList);
+        setScore(score + 1);
 
-        console.log(newList);
+        // console.log(newList);
       } else {
         const newList = [
           ...testList.slice(0, index),
@@ -71,23 +74,11 @@ function TestProviderComponent({ children }) {
         ];
         setTestList(newList);
 
-        console.log(newList);
+        // console.log(newList);
       }
     }
-    
-
-    // const index = todoList.findIndex((item) => item.id === todo.id);
+    setCount(count + 1);
   };
-
-  //   console.log(
-  //     'my answer: ',
-  //     answer,
-  //     'correct answer: ',
-  //     correct_answer,
-  //     'real: ',
-  //     isCorrect,
-  //   );
-  // };
 
   useEffect(() => {
     (async () => {
@@ -95,13 +86,15 @@ function TestProviderComponent({ children }) {
         difficulty: diffclty,
       });
       setTestList(data.results);
+      setScore(0);
+      setCount(0);
       // console.log(buttonCollor);
       // console.log(data);
     })();
   }, [diffclty]);
   return (
     <TestProvider.Provider
-      value={{ diffclty, testList, onSetDiffclty, onAnswer }}>
+      value={{ diffclty, testList, onSetDiffclty, onAnswer, count, score }}>
       {children}
     </TestProvider.Provider>
   );
