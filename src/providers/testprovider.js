@@ -8,9 +8,14 @@ function TestProviderComponent({ children }) {
   const [testList, setTestList] = useState([]);
   const [count, setCount] = useState(0);
   const [score, setScore] = useState(0);
+  const [reset, setReset] = useState(0);
 
   const onSetDiffclty = (diff) => {
     setDiffclty(diff);
+  };
+
+  const onReset = () => {
+    setReset(reset + 1);
   };
 
   const onAnswer = (answer, correct_answer) => {
@@ -91,10 +96,18 @@ function TestProviderComponent({ children }) {
       // console.log(buttonCollor);
       // console.log(data);
     })();
-  }, [diffclty]);
+  }, [diffclty, reset]);
   return (
     <TestProvider.Provider
-      value={{ diffclty, testList, onSetDiffclty, onAnswer, count, score }}>
+      value={{
+        diffclty,
+        testList,
+        onSetDiffclty,
+        onAnswer,
+        count,
+        score,
+        onReset,
+      }}>
       {children}
     </TestProvider.Provider>
   );
